@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     private InputManager _inputManager;
     [SerializeField]
     private CameraManager _cameraManager;
+    [SerializeField]
+    private PlayerAudioManager _playerAudioManager;
 
     [Header("Walk Movement")]
     [SerializeField]
@@ -333,6 +335,7 @@ public class PlayerMovement : MonoBehaviour
             _playerStance = PlayerStance.Glide;
             _animator.SetBool("isGliding", true);
             _cameraManager.SetFPSClampedCamera(true, transform.rotation.eulerAngles);
+            _playerAudioManager.PlayGlideSFX();
         }
     }
 
@@ -356,6 +359,7 @@ public class PlayerMovement : MonoBehaviour
             _playerStance = PlayerStance.Stand;
             _animator.SetBool("isGliding", false);
             _cameraManager.SetFPSClampedCamera(false, transform.rotation.eulerAngles);
+            _playerAudioManager.StopGlideSFX();
         }
     }
 

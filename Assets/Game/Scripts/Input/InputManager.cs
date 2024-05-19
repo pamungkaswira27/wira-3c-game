@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
     public Action OnGlideInput;
     public Action OnCancelGlide;
     public Action OnPunchInput;
+    public Action OnMainMenuInput;
 
     private Vector2 _inputAxis;
     
@@ -140,7 +141,7 @@ public class InputManager : MonoBehaviour
 
         if (isPressMainMenuInput)
         {
-
+            OnMainMenuInput?.Invoke();
         }
     }
 }
