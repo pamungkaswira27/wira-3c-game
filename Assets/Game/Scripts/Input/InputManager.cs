@@ -8,8 +8,11 @@ public class InputManager : MonoBehaviour
     public Action OnJumpInput;
     public Action OnClimbInput;
     public Action OnCancelClimb;
+
+    private Vector2 _inputAxis;
     
     private bool _isJump;
+    private bool _isMove;
 
     private void Update()
     {
@@ -27,6 +30,11 @@ public class InputManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_isMove)
+        {
+            OnMoveInput?.Invoke(_inputAxis);
+        }
+
         if (_isJump)
         {
             OnJumpInput?.Invoke();
@@ -38,9 +46,16 @@ public class InputManager : MonoBehaviour
     {
         float horizontalAxis = Input.GetAxis("Horizontal");
         float verticalAxis = Input.GetAxis("Vertical");
-        Vector2 inputAxis = new Vector2(horizontalAxis, verticalAxis);
+        _inputAxis = new Vector2(horizontalAxis, verticalAxis);
 
-        OnMoveInput?.Invoke(inputAxis);
+        if (_inputAxis.magnitude > 0.1f)
+        {
+            _isMove = true;
+        }
+        else
+        {
+            _isMove = false;
+        }
     }
 
     private void CheckSprintInput()
