@@ -121,6 +121,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Sprint(bool isSprint)
     {
+        if (_playerStance != PlayerStance.Stand)
+        {
+            return;
+        }
+
         if (isSprint)
         {
             if (_movementSpeed < _sprintSpeed)
