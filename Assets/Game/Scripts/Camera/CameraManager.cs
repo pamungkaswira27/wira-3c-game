@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
@@ -18,6 +19,8 @@ public class CameraManager : MonoBehaviour
     private CinemachineVirtualCamera _firstPersonCamera;
 
     public CameraState CameraState => _cameraState;
+
+    public Action OnChangePerspective;
 
     private void Start()
     {
@@ -66,5 +69,7 @@ public class CameraManager : MonoBehaviour
             _thirdPersonCamera.gameObject.SetActive(true);
             _firstPersonCamera.gameObject.SetActive(false);
         }
+
+        OnChangePerspective?.Invoke();
     }
 }

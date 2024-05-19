@@ -9,6 +9,10 @@ public class InputManager : MonoBehaviour
     public Action OnClimbInput;
     public Action OnCancelClimb;
     public Action OnChangePOV;
+    public Action OnCrouchInput;
+    public Action OnGlideInput;
+    public Action OnCancelGlide;
+    public Action OnPunchInput;
 
     private Vector2 _inputAxis;
     
@@ -75,7 +79,7 @@ public class InputManager : MonoBehaviour
 
         if (isPressCrouchInput)
         {
-
+            OnCrouchInput?.Invoke();
         }
     }
 
@@ -105,7 +109,7 @@ public class InputManager : MonoBehaviour
 
         if (isPressGlideInput)
         {
-
+            OnGlideInput?.Invoke();
         }
     }
 
@@ -116,6 +120,7 @@ public class InputManager : MonoBehaviour
         if (isPressCancelInput)
         {
             OnCancelClimb?.Invoke();
+            OnCancelGlide?.Invoke();
         }
     }
 
@@ -125,7 +130,7 @@ public class InputManager : MonoBehaviour
 
         if (isPressPunchInput)
         {
-
+            OnPunchInput?.Invoke();
         }
     }
 
