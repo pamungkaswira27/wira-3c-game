@@ -8,6 +8,8 @@ public class InputManager : MonoBehaviour
     public Action OnJumpInput;
     public Action OnClimbInput;
     public Action OnCancelClimb;
+    
+    private bool _isJump;
 
     private void Update()
     {
@@ -21,6 +23,15 @@ public class InputManager : MonoBehaviour
         CheckCancelInput();
         CheckPunchInput();
         CheckMainMenuInput();
+    }
+
+    private void FixedUpdate()
+    {
+        if (_isJump)
+        {
+            OnJumpInput?.Invoke();
+            _isJump = false;
+        }
     }
 
     private void CheckMovementInput()
@@ -52,7 +63,7 @@ public class InputManager : MonoBehaviour
 
         if (isPressJumpInput)
         {
-            OnJumpInput?.Invoke();
+            _isJump = true;
         }
     }
 
